@@ -26,6 +26,11 @@ cp Dockerfile-bun next-app-residencia-final/Dockerfile
 #cp Dockerfile-npm next-app-residencia-final/Dockerfile
 
 
+# VErsion de pnpm
+#echo "Copiando Dockerfile-bun a next-app-residencia-final/Dockerfile..."
+#cp Dockerfile-pnpm next-app-residencia-final/Dockerfile
+
+
 # 5. Modificar el archivo next.config.ts en el segundo repositorio
 NEXT_CONFIG_PATH="next-app-residencia-final/next.config.ts"
 echo "Modificando el archivo next.config.ts..."
