@@ -57,3 +57,8 @@ EOL
 
 echo "Proceso completado con éxito."
 #DB_URL=postgres://postgres:mypassword@postgres:5432/postgres
+
+#docker-compose up -d
+
+#docker-compose exec nextjs sh
+
