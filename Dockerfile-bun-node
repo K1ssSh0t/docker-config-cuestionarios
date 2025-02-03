@@ -1,0 +1,72 @@
+# ================================
+# Etapa 1: Builder (con Node.js y Bun)
+# ================================
+FROM node:18-bullseye-slim AS builder
+
+# Directorio de trabajo
+WORKDIR /app
+
+# Actualizar e instalar herramientas necesarias para instalar Bun
+RUN apt-get update && apt-get install -y curl unzip && rm -rf /var/lib/apt/lists/*
+
+# Instalar Bun (se ejecuta el script oficial)
+RUN curl -fsSL https://bun.sh/install | bash
+
+# Configurar variables de entorno para que Bun esté disponible
+ENV BUN_INSTALL="/root/.bun"
+ENV PATH="${BUN_INSTALL}/bin:${PATH}"
+
+# Verificamos la instalación de Bun (opcional)
+RUN bun --version
+
+# --- Instalar dependencias ---
+# Si deseas usar Bun para la instalación, asume que tienes:
+#   - package.json y (opcionalmente) bun.lockb (archivo de lock de Bun)
+# O, si prefieres usar Node.js (o pnpm, npm, yarn) para la instalación, adapta esta parte.
+#
+# En este ejemplo, copiamos los archivos de dependencias y usamos Bun para instalarlas.
+#COPY package.json bun.lockb* ./
+COPY package.json ./
+RUN bun install
+
+# Copiar el resto del código fuente
+COPY . .
+
+# Opcional: Compilar la aplicación si se requiere (por ejemplo, un build de Next.js)
+# Si tu script de build utiliza Node.js (npm o yarn), se ejecuta de la siguiente forma:
+
+#RUN npm run build
+
+RUN bun run build
+
+# ================================
+# Etapa 2: Imagen Final (Producción)
+# ================================
+FROM node:18-bullseye-slim
+
+# Directorio de trabajo
+WORKDIR /app
+
+# Instalar nuevamente las herramientas mínimas para Bun (si son necesarias en tiempo de ejecución)
+RUN apt-get update && apt-get install -y curl unzip && rm -rf /var/lib/apt/lists/*
+
+# Copiar la instalación de Bun desde la etapa builder
+COPY --from=builder /root/.bun /root/.bun
+
+# Copiar la aplicación completa (ya construida)
+COPY --from=builder /app /app
+
+# Configurar la variable de entorno para usar Bun
+ENV BUN_INSTALL="/root/.bun"
+ENV PATH="${BUN_INSTALL}/bin:${PATH}"
+
+# Exponer el puerto en el que se ejecuta la aplicación (por ejemplo, 3000)
+EXPOSE 3000
+
+# Comando de inicio de la aplicación. Puedes elegir:
+# - Usar Node.js (por ejemplo, "npm start") o
+# - Usar Bun para ejecutar algún script (por ejemplo, "bun run start")
+
+#CMD ["npm", "start"]
+
+CMD ["bun", "start"]
