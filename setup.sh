@@ -10,7 +10,7 @@ cd docker-config-cuestionarios
 
 # 2. Clonar el segundo repositorio dentro del primero
 echo "Clonando el repositorio next-app-residencia-final..."
-git clone -branch testNombres https://github.com/K1ssSh0t/next-app-residencia-final.git
+git clone --branch testNombres https://github.com/K1ssSh0t/next-app-residencia-final.git
 
 # 3. Crear un archivo .env vacío dentro del segundo repositorio
 echo "Creando el archivo .env en next-app-residencia-final..."
