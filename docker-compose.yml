@@ -1,1 +1,44 @@
+version: '3.8'
 
+services:
+  nextjs:
+    build:
+      context: ./nextjs
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"  # Se expone Next.js al exterior
+    # Se carga el archivo .env y, si es necesario, se pueden sobreescribir algunas variables:
+    env_file:
+      - .env
+    depends_on:
+      - postgres
+    networks:
+      - external_net
+      - internal_net
+
+  postgres:
+    image: postgres:13
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: mypassword
+      POSTGRES_DB: postgres
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    # Este servicio solo se conecta a la red interna para evitar exposición directa:
+    networks:
+      - internal_net
+    # Opcional: si necesitas exponer PostgreSQL en un puerto (p. ej.: 5433) para administración externa,
+    # puedes habilitar el siguiente mapeo. Recuerda actualizar la variable DB_URL en .env en ese caso.
+    # ports:
+    #   - "5433:5432"
+
+networks:
+  external_net:
+    driver: bridge
+  internal_net:
+    driver: bridge
+    internal: true
+
+volumes:
+  postgres-data:
