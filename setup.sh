@@ -45,6 +45,9 @@ const nextConfig: NextConfig = {
 export default nextConfig;
 EOL
 
+echo "Proceso completado con éxito."
+#DB_URL=postgres://postgres:mypassword@postgres:5432/postgres
+
 
 
 echo "Proceso completado con éxito."
