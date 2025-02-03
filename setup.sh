@@ -22,13 +22,18 @@ touch next-app-residencia-final/.env
 #cp Dockerfile-bun next-app-residencia-final/Dockerfile
 
 # VErsion de npm
-#echo "Copiando Dockerfile-bun a next-app-residencia-final/Dockerfile..."
+#echo "Copiando Dockerfile-npm a next-app-residencia-final/Dockerfile..."
 #cp Dockerfile-npm next-app-residencia-final/Dockerfile
 
 
 # VErsion de pnpm
-echo "Copiando Dockerfile-bun a next-app-residencia-final/Dockerfile..."
-cp Dockerfile-pnpm next-app-residencia-final/Dockerfile
+#echo "Copiando Dockerfile-pnpm a next-app-residencia-final/Dockerfile..."
+#cp Dockerfile-pnpm next-app-residencia-final/Dockerfile
+
+# VErsion de bun-node
+echo "Copiando Dockerfile-bun-node a next-app-residencia-final/Dockerfile..."
+cp Dockerfile-bun-node next-app-residencia-final/Dockerfile
+
 
 
 # 5. Modificar el archivo next.config.ts en el segundo repositorio
