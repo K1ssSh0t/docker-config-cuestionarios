@@ -18,8 +18,8 @@ touch next-app-residencia-final/.env
 
 # 4. Copiar el archivo Dockerfile-bun del primer repositorio al segundo repositorio
 #    renombrándolo a Dockerfile
-echo "Copiando Dockerfile-bun a next-app-residencia-final/Dockerfile..."
-cp Dockerfile-bun next-app-residencia-final/Dockerfile
+#echo "Copiando Dockerfile-bun a next-app-residencia-final/Dockerfile..."
+#cp Dockerfile-bun next-app-residencia-final/Dockerfile
 
 # VErsion de npm
 #echo "Copiando Dockerfile-bun a next-app-residencia-final/Dockerfile..."
@@ -27,8 +27,8 @@ cp Dockerfile-bun next-app-residencia-final/Dockerfile
 
 
 # VErsion de pnpm
-#echo "Copiando Dockerfile-bun a next-app-residencia-final/Dockerfile..."
-#cp Dockerfile-pnpm next-app-residencia-final/Dockerfile
+echo "Copiando Dockerfile-bun a next-app-residencia-final/Dockerfile..."
+cp Dockerfile-pnpm next-app-residencia-final/Dockerfile
 
 
 # 5. Modificar el archivo next.config.ts en el segundo repositorio
@@ -52,7 +52,3 @@ EOL
 
 echo "Proceso completado con éxito."
 #DB_URL=postgres://postgres:mypassword@postgres:5432/postgres
-
-
-
-echo "Proceso completado con éxito."
