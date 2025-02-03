@@ -56,6 +56,11 @@ export default nextConfig;
 EOL
 
 echo "Proceso completado con éxito."
+
+#chmod +x setup.sh
+#./setup.sh
+
+
 #DB_URL=postgres://postgres:mypassword@postgres:5432/postgres
 
 #docker-compose up -d
