@@ -21,4 +21,30 @@ touch next-app-residencia-final/.env
 echo "Copiando Dockerfile-bun a next-app-residencia-final/Dockerfile..."
 cp Dockerfile-bun next-app-residencia-final/Dockerfile
 
+# VErsion de npm
+#echo "Copiando Dockerfile-bun a next-app-residencia-final/Dockerfile..."
+#cp Dockerfile-npm next-app-residencia-final/Dockerfile
+
+
+# 5. Modificar el archivo next.config.ts en el segundo repositorio
+NEXT_CONFIG_PATH="next-app-residencia-final/next.config.ts"
+echo "Modificando el archivo next.config.ts..."
+
+cat > "$NEXT_CONFIG_PATH" <<EOL
+import type { NextConfig } from "next";
+
+const nextConfig: NextConfig = {
+  /* config options here */
+ eslint: {
+    // Warning: This allows production builds to successfully complete even if
+    // your project has ESLint errors.
+    ignoreDuringBuilds: true,
+  },
+};
+
+export default nextConfig;
+EOL
+
+
+
 echo "Proceso completado con éxito."
