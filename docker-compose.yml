@@ -3,7 +3,7 @@ version: '3.8'
 services:
   nextjs:
     build:
-      context: ./nextjs
+      context: ./next-app-residencia-final 
       dockerfile: Dockerfile
     ports:
       - "3000:3000"  # Se expone Next.js al exterior
