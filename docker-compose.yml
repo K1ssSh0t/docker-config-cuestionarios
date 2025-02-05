@@ -33,6 +33,19 @@ services:
     # ports:
     #   - "5433:5432"
 
+  caddy:
+    image: caddy:latest
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+    networks:
+      - external_net
+      - internal_net
+
 networks:
   external_net:
     driver: bridge
@@ -42,3 +55,5 @@ networks:
 
 volumes:
   postgres-data:
+  caddy_data:
+  caddy_config:
